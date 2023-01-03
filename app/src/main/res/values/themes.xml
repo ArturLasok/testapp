@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Allows us to override night specific attributes in the values-night folder. -->
+    <style name="NightAdjusted.Theme.MainToDo" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+
+    <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+    <style name="PlatformAdjusted.Theme.MainToDo" parent="NightAdjusted.Theme.MainToDo">
+        <item name="android:statusBarColor">@color/black30</item>
+    </style>
+
+    <!-- Style -->
+    <style name="Theme.MainToDo" parent="PlatformAdjusted.Theme.MainToDo" />
+
+
+    <!-- Splash Screen -->
+    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="Theme.MainToDo.Splash" parent="NightAdjusted.Theme.Splash">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/tasks</item>
+        <item name="postSplashScreenTheme">@style/Theme.MainToDo</item>
+    </style>
+
+
+</resources>
