@@ -9,6 +9,7 @@ import com.arturlasok.testapp.ui.start_screen.StartScreen
 @Composable
 fun NavigationComponent(
     navController: NavHostController,
+   isDarkModeOn: Boolean
 ) {
 
     NavHost(
@@ -21,7 +22,7 @@ fun NavigationComponent(
 
             StartScreen(
                 navigateTo = { route -> navController.navigate(route)  },
-                isDarkModeOn = true
+                isDarkModeOn = isDarkModeOn
             )
         }
 

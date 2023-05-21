@@ -1,18 +1,18 @@
 package com.arturlasok.testapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
     val viewModel: MainActivityViewModel by viewModels()
 
 
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -105,37 +106,52 @@ class MainActivity : ComponentActivity() {
                         systemUiController.setSystemBarsColor(Color(0xFF2E2828))
                     }
                 }
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    LaunchedEffect(key1 = true, block = {
-                        delay(5000)
-                        thisuiState = MainActivityUiState.ScreenReady
+                LaunchedEffect(key1 = true, block = {
+                    delay(3000)
+                    thisuiState = MainActivityUiState.ScreenReady
 
-                    } )
-                    Column() {
+                } )
+                Scaffold(
+                    scaffoldState = rememberScaffoldState(),
+                    topBar = {
                         Text(text = "Theme_dark: "+ dataStoreDarkTheme.value.toString() + " \nNetwork avilable: ${isOnline.isNetworkAvailable.value}" + " \nUiState: "+thisuiState.toString()  +
-                            "\nLang: "+ UiText.StringResource(R.string.app_language,"asd").asString(),)
-                        Button(onClick = {
-                            lifecycleScope.launch {
-                                applicationContext.dataStore.edit { settings->
-                                    val currentStoreValue = settings[IS_DARK_THEME] ?: false
-                                    settings[IS_DARK_THEME] = !currentStoreValue
-                                    viewModel.setDarkActiveTo(settings[IS_DARK_THEME] ?: false)
-                                }
-                            }
+                                "\nLang: "+ UiText.StringResource(R.string.app_language,"asd").asString(), style = MaterialTheme.typography.h6)
+                    },
+                    bottomBar = {
 
-                        }) {
-                            Text("change light/dark")
-                        }
-                        NavigationComponent(navController = navController)
                     }
+                ) {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colors.background
+                    ) {
+
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally) {
+
+                            Button(onClick = {
+                                lifecycleScope.launch {
+                                    applicationContext.dataStore.edit { settings->
+                                        val currentStoreValue = settings[IS_DARK_THEME] ?: false
+                                        settings[IS_DARK_THEME] = !currentStoreValue
+                                        viewModel.setDarkActiveTo(settings[IS_DARK_THEME] ?: false)
+                                    }
+                                }
+
+                            }) {
+                                Text("change light/dark")
+                            }
+                            NavigationComponent(
+                                navController = navController,
+                                isDarkModeOn = dataStoreDarkTheme.value)
+                        }
 
 
 
+                    }
                 }
+
             }
         }
     }

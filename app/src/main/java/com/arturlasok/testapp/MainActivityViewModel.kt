@@ -21,7 +21,7 @@ class MainActivityViewModel @Inject constructor(
         Log.i(TAG,"Data is changed VM")
 
 
-        MainActivityUiState.ScreenReady
+        MainActivityUiState.Loading
 
 
 
