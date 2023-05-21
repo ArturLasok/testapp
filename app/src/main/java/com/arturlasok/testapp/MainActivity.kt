@@ -107,6 +107,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 LaunchedEffect(key1 = true, block = {
+                    //fake delay
                     delay(3000)
                     thisuiState = MainActivityUiState.ScreenReady
 
