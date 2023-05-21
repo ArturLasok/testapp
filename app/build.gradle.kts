@@ -15,6 +15,8 @@ android {
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner =  "androidx.support.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
         compose = true
@@ -53,7 +55,7 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
     //Splash
-    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
     //Acomp
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.18.0")
     //data store
@@ -74,5 +76,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     //kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    //test
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.2.1")
+    // Needed for createAndroidComposeRule, but not createComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.2.1")
 
 }

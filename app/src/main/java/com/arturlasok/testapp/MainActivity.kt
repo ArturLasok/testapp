@@ -130,7 +130,7 @@ class MainActivity : ComponentActivity() {
                         Column(
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally) {
-
+                            Text(text= "Now Dark is: ${dataStoreDarkTheme.value}")
                             Button(onClick = {
                                 lifecycleScope.launch {
                                     applicationContext.dataStore.edit { settings->
