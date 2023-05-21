@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    namespace = "com.arturlasok.maintodo"
+    namespace = "com.arturlasok.testapp"
     compileSdk = 32
     defaultConfig {
-        applicationId = "com.arturlasok.maintodo"
+        applicationId = "com.arturlasok.testapp"
         minSdk = 26
         targetSdk = 32
         versionCode = 1
