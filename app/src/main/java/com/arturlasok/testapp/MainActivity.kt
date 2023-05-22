@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         //ui State
-        var thisuiState: MainActivityUiState by mutableStateOf(MainActivityUiState.Loading)
+        var thisuiState: MainActivityUiState by mutableStateOf(MainActivityUiState.ScreenReady)
 
 
         //Splash screen
@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
                 }
                 LaunchedEffect(key1 = true, block = {
                     //fake delay
-                    delay(3000)
+                    //delay(3000)
                     thisuiState = MainActivityUiState.ScreenReady
 
                 } )
@@ -119,7 +119,7 @@ class MainActivity : ComponentActivity() {
                                 "\nLang: "+ UiText.StringResource(R.string.app_language,"asd").asString(), style = MaterialTheme.typography.h6)
                     },
                     bottomBar = {
-
+Text("TEST")
                     }
                 ) {
                     Surface(
